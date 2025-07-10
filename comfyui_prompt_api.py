@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import os, json, requests
+import os, json, requests, sys
 from threading import Thread
 from pathlib import Path
 from requests.auth import HTTPBasicAuth
@@ -10,12 +10,18 @@ COMFY_API_PROMPT = f"{COMFY_API_BASE}/prompt"
 COMFY_API_QUEUE = f"{COMFY_API_BASE}/queue"
 WILDCARD_DIR = "wildcards/"
 PROMPT_NODE_ID = "1"
-NEXTCLOUD_WEBDAV_URL = os.getenv("NEXTCLOUD_WEBDAV_URL", "https://con.vcardmaker.site/nextcloud/remote.php/dav/files/herry/stickers/")
-NEXTCLOUD_USERNAME = os.getenv("NEXTCLOUD_USERNAME", "herry")
-NEXTCLOUD_PASSWORD = os.getenv("NEXTCLOUD_PASSWORD", "aJB7P-5jDWm-3pwRn-fpKqY-9jZnH gpu")
-UPLOAD_FOLDER = "../ComfyUI/output"
+UPLOAD_FOLDER = "upload_folder"
 HOST = "0.0.0.0"
 PORT = 5010
+
+# Accept WebDAV credentials from command line
+if len(sys.argv) < 4:
+    print("Usage: python script.py <webdav_url> <username> <password>")
+    sys.exit(1)
+
+WEBDAV_URL = sys.argv[1]
+WEBDAV_USERNAME = sys.argv[2]
+WEBDAV_PASSWORD = sys.argv[3]
 
 # Upload status
 upload_status = {
@@ -77,8 +83,8 @@ def upload_to_nextcloud():
     for file_path in files:
         try:
             with open(file_path, 'rb') as f:
-                url = f"{NEXTCLOUD_WEBDAV_URL}{file_path.name}"
-                resp = requests.put(url, data=f, auth=HTTPBasicAuth(NEXTCLOUD_USERNAME, NEXTCLOUD_PASSWORD))
+                dest = f"{WEBDAV_URL.rstrip('/')}/{file_path.name}"
+                resp = requests.put(dest, data=f, auth=HTTPBasicAuth(WEBDAV_USERNAME, WEBDAV_PASSWORD))
                 resp.raise_for_status()
                 upload_status["uploaded"] += 1
         except Exception as e:
