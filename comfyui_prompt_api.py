@@ -11,9 +11,9 @@ COMFY_API_QUEUE = f"{COMFY_API_BASE}/queue"
 WILDCARD_DIR = "wildcards/"
 PROMPT_NODE_ID = "1"
 NEXTCLOUD_WEBDAV_URL = os.getenv("NEXTCLOUD_WEBDAV_URL", "https://con.vcardmaker.site/nextcloud/remote.php/dav/files/herry/stickers/")
-NEXTCLOUD_USERNAME = os.getenv("NEXTCLOUD_USERNAME", "username")
-NEXTCLOUD_PASSWORD = os.getenv("NEXTCLOUD_PASSWORD", "password")
-UPLOAD_FOLDER = "upload_folder"
+NEXTCLOUD_USERNAME = os.getenv("NEXTCLOUD_USERNAME", "herry")
+NEXTCLOUD_PASSWORD = os.getenv("NEXTCLOUD_PASSWORD", "aJB7P-5jDWm-3pwRn-fpKqY-9jZnH gpu")
+UPLOAD_FOLDER = "../ComfyUI/output"
 HOST = "0.0.0.0"
 PORT = 5010
 
