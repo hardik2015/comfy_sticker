@@ -8,7 +8,6 @@ from requests.auth import HTTPBasicAuth
 COMFY_API_BASE = os.getenv("COMFY_API_BASE", "http://localhost:8188/api")
 COMFY_API_PROMPT = f"{COMFY_API_BASE}/prompt"
 COMFY_API_QUEUE = f"{COMFY_API_BASE}/queue"
-WILDCARD_DIR = "wildcards/"
 PROMPT_NODE_ID = "1"
 UPLOAD_FOLDER = "../ComfyUI/output"
 HOST = "0.0.0.0"
@@ -45,7 +44,7 @@ def build_prompt(main_prompt: str):
     return ', '.join(prefix_lines + [main_prompt] + suffix_lines)
 
 def load_workflow():
-    workflow_path = os.path.join(os.getcwd(), "workflows", "gfv1.json")
+    workflow_path = os.path.join(os.getcwd(), "sticker.json")
     if not os.path.exists(workflow_path):
         raise FileNotFoundError(f"Workflow file not found: {workflow_path}")
     with open(workflow_path, encoding="utf-8") as f:
