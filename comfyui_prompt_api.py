@@ -10,7 +10,7 @@ COMFY_API_PROMPT = f"{COMFY_API_BASE}/prompt"
 COMFY_API_QUEUE = f"{COMFY_API_BASE}/queue"
 WILDCARD_DIR = "wildcards/"
 PROMPT_NODE_ID = "1"
-UPLOAD_FOLDER = "upload_folder"
+UPLOAD_FOLDER = "../ComfyUI/output"
 HOST = "0.0.0.0"
 PORT = 5010
 
