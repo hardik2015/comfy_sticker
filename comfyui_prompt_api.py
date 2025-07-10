@@ -66,7 +66,6 @@ def send_to_comfy(payload):
         resp = requests.post(COMFY_API_PROMPT, json=payload, timeout=10)
         resp.raise_for_status()
         data = resp.json()
-        print("✅ ComfyUI response:", json.dumps(data, indent=2))
         return data
     except requests.exceptions.RequestException as e:
         print("❌ Error from ComfyUI API:", str(e))
@@ -83,6 +82,7 @@ def upload_to_nextcloud():
         try:
             with open(file_path, 'rb') as f:
                 dest = f"{WEBDAV_URL.rstrip('/')}/{file_path.name}"
+                print("✅ ComfyUI response:", dest)
                 resp = requests.put(dest, data=f, auth=HTTPBasicAuth(WEBDAV_USERNAME, WEBDAV_PASSWORD))
                 resp.raise_for_status()
                 upload_status["uploaded"] += 1
