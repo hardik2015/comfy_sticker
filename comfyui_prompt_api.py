@@ -34,7 +34,7 @@ app = Flask(__name__)
 # ——— Utility Functions ———
 
 def read_all_lines(filename):
-    path = os.path.join(WILDCARD_DIR, filename)
+    path = os.path.join(filename)
     with open(path, encoding="utf-8") as f:
         return [line.strip() for line in f if line.strip()]
 
